@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import connection from "./database/database.js";
+
 const app = express();
 const port = 8080;
-const connection = require("./database/database");
 
 // Database
 connection
