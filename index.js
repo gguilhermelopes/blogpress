@@ -1,5 +1,9 @@
 import express from "express";
 import connection from "./database/database.js";
+import Article from "./articles/Article.js";
+import Category from "./categories/Category.js";
+import articlesController from "./articles/articlesController.js";
+import categoriesController from "./categories/CategoriesController.js";
 
 const app = express();
 const port = 8080;
@@ -20,8 +24,13 @@ app.set("view engine", "ejs");
 // Static
 app.use(express.static("public"));
 
+// Receber arquivos json
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Rotas
+app.use("/categories", categoriesController);
+app.use("/articles", articlesController);
 
 app.get("/", (req, res) => {
   res.render("index");
