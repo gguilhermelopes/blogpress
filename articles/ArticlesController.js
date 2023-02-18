@@ -1,7 +1,7 @@
 import express from "express";
 const articlesController = express.Router();
 
-articlesController.get("/", (req, res) => {
+articlesController.get("/articles", (req, res) => {
   res.send("Rota de Artigos");
 });
 
