@@ -4,8 +4,9 @@
       <div class="card mt-5">
         <div class="card-body">
           <h2>Edição de categorias</h2>
-          <form method="post" class="mt-5" action="/categories/save">
+          <form method="post" class="mt-5" action="/categories/update">
             <input class="form-control" type="text" name="title" placeholder="Defina o título da categoria" value="<%= category.title %>">
+            <input type="hidden" name="id" value="<%= category.id %>">
             <button type="submit" class="btn btn-dark mt-3">Atualizar</button>
           </form>
         </div>

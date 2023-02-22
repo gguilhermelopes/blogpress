@@ -59,4 +59,19 @@ categoriesController.get("/admin/categories/edit/:id", (req, res) => {
     });
 });
 
+categoriesController.post("/categories/update", (req, res) => {
+  const { id, title } = req.body;
+
+  Category.update(
+    { title: title, slug: slugify(title).toLowerCase() },
+    {
+      where: {
+        id: id,
+      },
+    }
+  ).then(() => {
+    res.redirect("/admin/categories");
+  });
+});
+
 export default categoriesController;
