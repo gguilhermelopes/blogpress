@@ -3,15 +3,15 @@
 
     <body>
       <main class="container mt-5">
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid mb-5">
           <div class="container">
             <h1 class="display-4">Bem vindo ao BlogPress!</h1>
             <p class="lead">Esse é um projeto de um blog desenvolvido utilizando NodeJS.</p>
           </div>
         </div>
-        <section class="d-flex gap-3 flex-wrap justify-content-between">
+        <section class="d-flex gap-3 flex-wrap">
           <% articles.forEach((article)=> { %>
-            <div class="card" style="min-width: 18rem;">
+            <div class="card d-flex flex-column flex-fill" style="width: 18rem ;">
               <div class="card-body">
                 <h5 class="card-title">
                   <%= article.title %>
@@ -19,11 +19,15 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= article.category.title %>
                 </h6>
-                <a href="/<%= article.slug %>" class="btn btn-dark">Ler artigo</a>
               </div>
-              <p class="ms-auto me-3">
-                <%= article.createdAt.getDate() %>/<%= article.createdAt.getMonth()+1 %>/<%= article.createdAt.getFullYear() %>
-              </p>
+
+              <div class="card-footer text-muted text-center">
+                <a style="width: 100%;" href="/<%= article.slug %>" class="btn btn-dark mb-3">Ler artigo</a>
+                <p>
+                  <%= article.createdAt.getDate() %>/<%= article.createdAt.getMonth()+1 %>/<%= article.createdAt.getFullYear() %>
+                </p>
+              </div>
+
             </div>
             <% }) %>
         </section>
