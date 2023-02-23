@@ -16,25 +16,25 @@
         <tbody>
           <% categories.forEach((category)=> { %>
             <tr>
-              <th>
+              <td>
                 <%= category.id %>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= category.title %>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= category.slug %>
-              </th>
-              <th class="d-flex gap-3">
+              </td>
+              <td class="d-flex gap-3">
                 <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-dark">Editar</a>
                 <form method="POST" action="/categories/delete" onsubmit="confirmDelete(event, this)">
                   <input type="hidden" name="id" value="<%= category.id %>">
                   <button id="delete-button" class="btn btn-danger">Deletar</button>
                 </form>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= category.createdAt.getDate() %>/<%= category.createdAt.getMonth()+1 %>/<%= category.createdAt.getFullYear() %>
-              </th>
+              </td>
             </tr>
             <% }) %>
         </tbody>
