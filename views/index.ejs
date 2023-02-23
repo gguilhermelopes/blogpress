@@ -1,7 +1,31 @@
 <%- include('partials/head.ejs')%>
+  <%- include('partials/homenavbar.ejs')%>
 
-  <body>
-    <h1>Testando views</h1>
-  </body>
+    <body>
+      <main class="container mt-5">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Bem vindo ao BlogPress!</h1>
+            <p class="lead">Esse é um projeto de um blog desenvolvido utilizando NodeJS.</p>
+          </div>
+        </div>
+        <section class="d-flex gap-3 flex-wrap justify-content-between">
+          <% articles.forEach((article)=> { %>
+            <div class="card" style="min-width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= article.title %>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <%= article.category.title %>
+                </h6>
+                <a href="#" class="btn btn-dark">Ler artigo</a>
+              </div>
+            </div>
+            <% }) %>
+        </section>
 
-  <%- include('partials/foot.ejs')%>
+      </main>
+    </body>
+
+    <%- include('partials/foot.ejs')%>
