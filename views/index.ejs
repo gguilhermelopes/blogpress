@@ -19,8 +19,11 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= article.category.title %>
                 </h6>
-                <a href="#" class="btn btn-dark">Ler artigo</a>
+                <a href="/<%= article.slug %>" class="btn btn-dark">Ler artigo</a>
               </div>
+              <p class="ms-auto me-3">
+                <%= article.createdAt.getDate() %>/<%= article.createdAt.getMonth()+1 %>/<%= article.createdAt.getFullYear() %>
+              </p>
             </div>
             <% }) %>
         </section>

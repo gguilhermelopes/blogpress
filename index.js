@@ -39,9 +39,29 @@ app.get("/", (req, res) => {
         model: Category,
       },
     ],
+    order: [["id", "DESC"]],
   }).then((articles) => {
     res.render("index", { articles });
   });
+});
+
+app.get("/:slug", (req, res) => {
+  const { slug } = req.params;
+  Article.findOne({
+    where: {
+      slug: slug,
+    },
+  })
+    .then((article) => {
+      if (article) {
+        res.render("article", { article });
+      } else {
+        res.redirect("/");
+      }
+    })
+    .catch((error) => {
+      res.redirect("/");
+    });
 });
 
 app.listen(port, () => {
