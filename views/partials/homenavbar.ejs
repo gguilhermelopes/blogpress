@@ -2,4 +2,13 @@
   <a href="/" class="navbar-brand ms-5 fw-bold fs-3">
     BlogPress
   </a>
+  <ul class="navbar-nav mr-auto">
+    <% categories.forEach((category)=> { %>
+      <li class="nav-item">
+        <a href="/category/<%= category.slug %>" class="nav-link">
+          <%= category.title %>
+        </a>
+      </li>
+      <% }) %>
+  </ul>
 </nav>
