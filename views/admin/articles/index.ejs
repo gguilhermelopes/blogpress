@@ -22,7 +22,8 @@
               <td><%- article.title %></td>
               <td><%- article.slug %></td>
               <td><%- article.category.title %></td>
-              <td>
+              <td class="d-flex gap-3">
+                <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-dark">Editar</a>
                 <form method="POST" action="/articles/delete" onsubmit="confirmDelete(event, this)">
                   <input type="hidden" name="id" value="<%= article.id %>">
                   <button id="delete-button" class="btn btn-danger">Deletar</button>

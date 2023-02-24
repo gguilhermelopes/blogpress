@@ -5,8 +5,14 @@
       <main class="container mt-5">
         <div class="jumbotron jumbotron-fluid mb-5">
           <div class="container">
+
             <h1 class="display-4">Bem vindo ao BlogPress!</h1>
             <p class="lead">Esse é um projeto de um blog desenvolvido utilizando NodeJS.</p>
+            <% if(category) { %>
+              <h3>
+                <%=category.title%>
+              </h3>
+              <% } %>
           </div>
         </div>
         <section class="d-flex gap-4 flex-wrap justify-content-center ">

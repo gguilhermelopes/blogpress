@@ -33,11 +33,12 @@ app.use("/", categoriesController);
 app.use("/", articlesController);
 
 app.get("/", (req, res) => {
+  const category = null;
   Article.findAll({
     order: [["id", "DESC"]],
   }).then((articles) => {
     Category.findAll().then((categories) => {
-      res.render("index", { articles, categories });
+      res.render("index", { articles, categories, category });
     });
   });
 });
@@ -78,7 +79,11 @@ app.get("/category/:slug", (req, res) => {
     .then((category) => {
       if (category) {
         Category.findAll().then((categories) => {
-          res.render("index", { articles: category.articles, categories });
+          res.render("index", {
+            articles: category.articles,
+            categories,
+            category,
+          });
         });
       } else {
         res.redirect("/");
