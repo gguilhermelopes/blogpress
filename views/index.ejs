@@ -9,17 +9,18 @@
             <p class="lead">Esse é um projeto de um blog desenvolvido utilizando NodeJS.</p>
           </div>
         </div>
-        <section class="d-flex gap-3 flex-wrap justify-content-between ">
+        <section class="d-flex gap-4 flex-wrap justify-content-center ">
           <% articles.forEach((article)=> { %>
-            <div class="card d-flex flex-column flex-fill">
+            <div class="card d-flex flex-column flex-fill" style="max-width: 30ch;">
               <div class="card-body">
                 <h5 class="card-title">
                   <%= article.title %>
                 </h5>
+
               </div>
 
               <div class="card-footer text-muted text-center">
-                <a style="width: 12ch;" href="/<%= article.slug %>" class="btn btn-secondary mb-3">Ler artigo</a>
+                <a style="width: 12ch;" href="/<%= article.slug %>" class="btn btn-secondary mb-3 mt-3">Ler artigo</a>
                 <p>
                   <%= article.createdAt.getDate() %>/<%= article.createdAt.getMonth()+1 %>/<%= article.createdAt.getFullYear() %>
                 </p>

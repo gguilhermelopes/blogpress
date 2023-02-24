@@ -51,4 +51,45 @@ articlesController.post("/articles/delete", (req, res) => {
   }
 });
 
+articlesController.get("/admin/articles/edit/:id", (req, res) => {
+  const { id } = req.params;
+  Article.findByPk(id)
+    .then((article) => {
+      if (article) {
+        Category.findAll().then((categories) => {
+          res.render("admin/articles/edit", { categories, article });
+        });
+      } else {
+        res.redirect("/admin/articles");
+      }
+    })
+    .catch((error) => {
+      res.redirect("/admin/articles");
+    });
+});
+
+articlesController.post("/articles/update", (req, res) => {
+  const { id, title, body, category } = req.body;
+
+  Article.update(
+    {
+      title,
+      body,
+      categoryId: category,
+      slug: slugify(title).toLowerCase(),
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  )
+    .then(() => {
+      res.redirect("/admin/articles");
+    })
+    .catch((error) => {
+      res.redirect("/admin/articles/edit/:id");
+    });
+});
+
 export default articlesController;
