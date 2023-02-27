@@ -2,8 +2,11 @@ import express from "express";
 import connection from "./database/database.js";
 import Article from "./articles/Article.js";
 import Category from "./categories/Category.js";
+import User from "./user/User.js";
 import articlesController from "./articles/articlesController.js";
 import categoriesController from "./categories/CategoriesController.js";
+import usersController from "./user/UsersController.js";
+import session from "express-session";
 
 const app = express();
 const port = 8080;
@@ -28,9 +31,20 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Sessões
+app.use(
+  session({
+    secret: "123",
+    cookie: {
+      maxAge: 30000,
+    },
+  })
+);
+
 // Rotas
 app.use("/", categoriesController);
 app.use("/", articlesController);
+app.use("/", usersController);
 
 app.get("/", (req, res) => {
   const category = null;

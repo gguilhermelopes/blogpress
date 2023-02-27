@@ -32,9 +32,11 @@
             </div>
             <% }) %>
         </section>
-        <div class="mt-5 d-flex justify-content-end">
-          <a class="btn btn-outline-secondary" href="/articles/page/2">Ver mais artigos</a>
-        </div>
+        <% if(!category) { %>
+          <div class="mt-5 d-flex justify-content-end">
+            <a class="btn btn-outline-secondary" href="/articles/page/2">Ver mais artigos</a>
+          </div>
+          <% } %>
       </main>
     </body>
 
