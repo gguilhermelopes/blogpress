@@ -92,4 +92,33 @@ articlesController.post("/articles/update", (req, res) => {
     });
 });
 
+articlesController.get("/articles/page/:pageNumber", (req, res) => {
+  const { pageNumber } = req.params;
+  let offset = 0;
+  if (isNaN(pageNumber) || pageNumber == 1) {
+    offset = 0;
+  } else {
+    offset = (+pageNumber - 1) * 4;
+  }
+
+  Article.findAndCountAll({
+    limit: 4,
+    offset: offset,
+    order: [["id", "DESC"]],
+  }).then((articles) => {
+    let next = true;
+    if (offset + 4 >= articles.count) {
+      next = false;
+    }
+    const result = {
+      next,
+      articles,
+      pageNumber: +pageNumber,
+    };
+    Category.findAll().then((categories) => {
+      res.render("articlesPage", { result, categories });
+    });
+  });
+});
+
 export default articlesController;

@@ -3,38 +3,39 @@
 
     <body>
       <main class="container mt-5">
-        <div class="jumbotron jumbotron-fluid mb-5">
-          <div class="container">
-
-            <h1 class="display-4">Bem vindo ao BlogPress!</h1>
-            <p class="lead">Esse é um projeto de um blog desenvolvido utilizando NodeJS.</p>
-            <% if(category) { %>
-              <h3>
-                <%=category.title%>
-              </h3>
-              <% } %>
-          </div>
-        </div>
         <section class="d-flex gap-4 flex-wrap justify-content-center ">
-          <% articles.forEach((article)=> { %>
+          <% result.articles.rows.forEach((article)=> { %>
             <div class="card d-flex flex-column flex-fill" style="max-width: 30ch;">
               <div class="card-body">
                 <h5 class="card-title">
                   <%= article.title %>
                 </h5>
+
               </div>
+
               <div class="card-footer text-muted text-center">
                 <a style="width: 12ch;" href="/<%= article.slug %>" class="btn btn-secondary mb-3 mt-3">Ler artigo</a>
                 <p>
                   <%= article.createdAt.getDate() %>/<%= article.createdAt.getMonth()+1 %>/<%= article.createdAt.getFullYear() %>
                 </p>
               </div>
+
             </div>
             <% }) %>
         </section>
-        <div class="mt-5 d-flex justify-content-end">
-          <a class="btn btn-outline-secondary" href="/articles/page/2">Ver mais artigos</a>
+        <div class="mt-5 d-flex justify-content-between">
+          <% if(result.pageNumber> 2 ) { %>
+            <a class="btn btn-outline-secondary" href="/articles/page/<%= result.pageNumber - 1 %>">Página Anterior</a>
+            <% } else if (result.pageNumber==2) { %>
+              <a class="btn btn-outline-secondary" href="/">Página Anterior</a>
+              <% } %>
+
+
+                <% if(result.next) { %>
+                  <a class="btn btn-outline-secondary" href="/articles/page/<%= result.pageNumber + 1 %>">Próxima Página</a>
+                  <% } %>
         </div>
+
       </main>
     </body>
 
