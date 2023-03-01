@@ -2,10 +2,11 @@ import express from "express";
 import Category from "../categories/Category.js";
 import Article from "../articles/Article.js";
 import slugify from "slugify";
+import adminAuth from "../middlewares/adminAuth.js";
 
 const articlesController = express.Router();
 
-articlesController.get("/admin/articles", (req, res) => {
+articlesController.get("/admin/articles", adminAuth, (req, res) => {
   Article.findAll({
     include: [
       {
@@ -17,13 +18,13 @@ articlesController.get("/admin/articles", (req, res) => {
   });
 });
 
-articlesController.get("/admin/articles/new", (req, res) => {
+articlesController.get("/admin/articles/new", adminAuth, (req, res) => {
   Category.findAll().then((categories) => {
     res.render("admin/articles/new", { categories });
   });
 });
 
-articlesController.post("/articles/save", (req, res) => {
+articlesController.post("/articles/save", adminAuth, (req, res) => {
   const { title, body, category } = req.body;
 
   Article.create({
@@ -36,7 +37,7 @@ articlesController.post("/articles/save", (req, res) => {
   });
 });
 
-articlesController.post("/articles/delete", (req, res) => {
+articlesController.post("/articles/delete", adminAuth, (req, res) => {
   const { id } = req.body;
   if (id && !isNaN(id)) {
     Article.destroy({
@@ -51,7 +52,7 @@ articlesController.post("/articles/delete", (req, res) => {
   }
 });
 
-articlesController.get("/admin/articles/edit/:id", (req, res) => {
+articlesController.get("/admin/articles/edit/:id", adminAuth, (req, res) => {
   const { id } = req.params;
   Article.findByPk(id)
     .then((article) => {
@@ -68,7 +69,7 @@ articlesController.get("/admin/articles/edit/:id", (req, res) => {
     });
 });
 
-articlesController.post("/articles/update", (req, res) => {
+articlesController.post("/articles/update", adminAuth, (req, res) => {
   const { id, title, body, category } = req.body;
 
   Article.update(

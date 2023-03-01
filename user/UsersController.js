@@ -35,4 +35,34 @@ usersController.post("/users/create", (req, res) => {
   });
 });
 
+usersController.get("/login", (req, res) => {
+  res.render("admin/users/login");
+});
+
+usersController.post("/authenticate", (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({
+    where: {
+      email: email,
+    },
+  }).then((user) => {
+    if (user) {
+      const correct = bcryptjs.compareSync(password, user.password);
+      if (correct) {
+        const { id, email } = user;
+        req.session.user = {
+          id,
+          email,
+        };
+        res.redirect("/admin/articles");
+      } else {
+        res.redirect("/login");
+      }
+    } else {
+      res.redirect("/login");
+    }
+  });
+});
+
 export default usersController;
