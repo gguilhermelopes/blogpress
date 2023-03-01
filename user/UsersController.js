@@ -65,4 +65,9 @@ usersController.post("/authenticate", (req, res) => {
   });
 });
 
+usersController.get("/logout", (req, res) => {
+  req.session.user = null;
+  res.redirect("/");
+});
+
 export default usersController;

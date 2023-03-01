@@ -1,15 +1,15 @@
 <%- include('../../partials/head.ejs')%>
-  <%- include('../../partials/navbar.ejs')%>
-    <main class="container">
-      <div class="card mt-5">
-        <div class="card-body">
-          <h2>Login de Admin</h2>
-          <form action="/authenticate" method="POST" class="mt-5">
-            <input class="form-control mb-3" type="email" name="email" placeholder="email@exemplo.com">
-            <input class="form-control mb-3" type="password" name="password" placeholder="senha">
-            <button type="submit" class="btn btn-dark mt-3">Login</button>
-          </form>
-        </div>
+
+  <main class="container">
+    <div class="card mt-5">
+      <div class="card-body">
+        <h2>Login de Admin</h2>
+        <form action="/authenticate" method="POST" class="mt-5">
+          <input class="form-control mb-3" type="email" name="email" placeholder="email@exemplo.com">
+          <input class="form-control mb-3" type="password" name="password" placeholder="senha">
+          <button type="submit" class="btn btn-dark mt-3">Login</button>
+        </form>
       </div>
-    </main>
-    <%- include('../../partials/foot.ejs')%>
+    </div>
+  </main>
+  <%- include('../../partials/foot.ejs')%>
